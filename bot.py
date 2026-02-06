@@ -1,3 +1,5 @@
+import os
+import json
 import pandas as pd
 import gspread
 from oauth2client.service_account import ServiceAccountCredentials
@@ -5,10 +7,15 @@ from telegram import Update
 from telegram.ext import ApplicationBuilder, MessageHandler, filters, ContextTypes
 import time
 
+
 # -----------------------
 # 1️⃣ Telegram Bot Token
 # -----------------------
-TOKEN = "8474453393:AAE4A7tAl7irTEJf2DB-nstTgioolaVqyW0"  # Replace with your BotFather token
+TOKEN = TOKEN = os.environ.get("TELEGRAM_TOKEN")
+if not TOKEN:
+    print("❌ TELEGRAM_TOKEN environment variable not set. Exiting...")
+    exit()
+ # Replace with your BotFather token
 
 # -----------------------
 # 2️⃣ Google Sheet Info
@@ -19,10 +26,19 @@ SHEET_NAME = "Sheet1"
 # -----------------------
 # 3️⃣ Connect Google Sheets with retry
 # -----------------------
+# Read Google credentials from Railway environment variable
 scope = ["https://spreadsheets.google.com/feeds",
          "https://www.googleapis.com/auth/drive"]
 
-creds = ServiceAccountCredentials.from_json_keyfile_name("creds.json", scope)
+creds_json = os.environ.get("GOOGLE_CREDS")  # Railway env variable
+if not creds_json:
+    print("❌ GOOGLE_CREDS environment variable not set. Exiting...")
+    exit()
+
+creds_dict = json.loads(creds_json)
+
+
+
 client = gspread.authorize(creds)
 
 retry_count = 5
