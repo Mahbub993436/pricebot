@@ -1,0 +1,13 @@
+{
+  "type": "service_account",
+  "project_id": "pricebot-486604",
+  "private_key_id": "41e9cbcfde7f8c509601156d9840f9a046f587c0",
+  "private_key": "-----BEGIN PRIVATE KEY-----\nMIIEvgIBADANBgkqhkiG9w0BAQEFAASCBKgwggSkAgEAAoIBAQC1v/TmBhhmECqD\nx43huP9f4JjJ1GWpRhcj8ghH0RM1HnYF2BPvLxv8/Wl7BamMdyTTIvuEKZRhq15G\n/FQaRMsavYD31U6KJYHyl2pgqDBJ+iKf35r8iPVxtn9sDJQTXXcBT41ChefPyRkF\n8Dxt5GBEJDAWkhJVyABpTxVNtZ2wtfjW1L1bNzT4RsQS29eN9Yl2N3QzCONUQMPn\nygaixFWYFrNcK/oSlRV9ql+VnBn7VSjO0/YVkvF/D31H1ieIMHryKYVpX7SArEuG\nmmv5zBBmy59gzEalRWEeHpbICALlV0Zz70KUuPscy1csgPz7bzYru25Dl1adFzhw\ndIsLlQ+PAgMBAAECggEAB1FwMXY2XkmxWeFbnPv0yxir3kM/SAEVUR0KPftfpshl\nX9fdpEhae/sngkzDO8TXsT6xL5b4WAnClTYiHB///kF6I2st1ecruSe6oKNftQ2C\n07rOWUkZz5crFfUtsy0/a53skKymna8PDbZTdeiiWFa4BE35D1uAahJv8lM+mGJc\nqUQc4i8UEjYM/enbM8K9LXhSC87Rax56kAq86NXI7O4sDdkbeFCeF9qebvqDIhAt\noGoV0vkj4zLYdIZJBE/MwNVSQbJjdhGk4S1REktFbuQZDd9SKA0CKt3tB0sDa9DC\nFtSYEao0MMKU1Yb1PwQO/vsiH5QMrwivXi1RPsWcoQKBgQDeOrsBxBGPN/htsmLZ\nkdbVeD1D9Ukr8uOrchnqckPkt4vr760036i1tK0um1JjVu4BRix1IHGHMtCB81ap\ncHZiVIIPQschqM4vS10wxQuhPi1AZdczw2HQ2EaKlxPearqhBgPWfuAskPvQZRP/\nYLm1jHf+Dvi4fTM79INw7H+rrwKBgQDRXniQcIYJe/9RMK0kLibbrqtx7CRkty5m\nEVkHpeaBVQtzljovFFsbVE+TWurwAGvn4nODoslXYT4ojO+eb91OL6rAUKtQZMzt\niYaELl03gZeiSzLmeq8TI4IznywMqa2NQ7/4Z7L0IDaoamkuPhS4F+LR4G2iHDNe\nRSC+JRRyIQKBgQCcLLgJuKoCdXowVWIktto88SBVJwdCTJL1hN1zptPR47AAolKe\nSuQ8tnnSvDM9PvVKje9mbON7+RkRilqH/1IjLnKsmOhq3j/wes1GHeRbb9/LVwbT\nCOcwJx4D/cJn16fKy/hcgJO4njdpr+9K1MYOMWaOdCUVOl+MLf1Fmd7rXwKBgQC3\nRZMUHOu38asVTx7AxQWO19+L4cIZx5/+CMF+SGL2Y5Oaoq5b992olqzxuGxfmn7a\nhQfI+v50VtMqe/RlJFb80g0OO4862IHqjLALlOpUZERv9JOh3VLT1glrVrIgg4dA\nWUX6FAw6VtiBpGRd7koEvCP4xBQ0C6uLocd/qsWzAQKBgFbZe1OKbEU/WioM54hk\nzadBo6z1l02mRFQpCJAltM/DNQiBU+dadw756laitz3GptrgdykNRUyVN7lw8yAo\nThguUyzng12pV4nOyNrrKaPuWL149JnqD+OIflV1UBaNmSSLMthlLS+j8+TCGlvA\nupM+RTNX7RV0/D/fhwnvDY4A\n-----END PRIVATE KEY-----\n",
+  "client_email": "name-sheet-reader@pricebot-486604.iam.gserviceaccount.com",
+  "client_id": "102054473620879236005",
+  "auth_uri": "https://accounts.google.com/o/oauth2/auth",
+  "token_uri": "https://oauth2.googleapis.com/token",
+  "auth_provider_x509_cert_url": "https://www.googleapis.com/oauth2/v1/certs",
+  "client_x509_cert_url": "https://www.googleapis.com/robot/v1/metadata/x509/name-sheet-reader%40pricebot-486604.iam.gserviceaccount.com",
+  "universe_domain": "googleapis.com"
+}

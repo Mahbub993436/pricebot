@@ -1,0 +1,99 @@
+import pandas as pd
+import gspread
+from oauth2client.service_account import ServiceAccountCredentials
+from telegram import Update
+from telegram.ext import ApplicationBuilder, MessageHandler, filters, ContextTypes
+import time
+
+# -----------------------
+# 1️⃣ Telegram Bot Token
+# -----------------------
+TOKEN = "8474453393:AAE4A7tAl7irTEJf2DB-nstTgioolaVqyW0"  # Replace with your BotFather token
+
+# -----------------------
+# 2️⃣ Google Sheet Info
+# -----------------------
+SHEET_ID = "1fuyPyphuinKgpm1qgLAdNBR5CKm9VzwYXYjAfV2gF54"
+SHEET_NAME = "Sheet1"
+
+# -----------------------
+# 3️⃣ Connect Google Sheets with retry
+# -----------------------
+scope = ["https://spreadsheets.google.com/feeds",
+         "https://www.googleapis.com/auth/drive"]
+
+creds = ServiceAccountCredentials.from_json_keyfile_name("creds.json", scope)
+client = gspread.authorize(creds)
+
+retry_count = 5
+while retry_count > 0:
+    try:
+        sheet = client.open_by_key(SHEET_ID).worksheet(SHEET_NAME)
+        data = pd.DataFrame(sheet.get_all_records(expected_headers=["ItemCode", "ItemName", "MRP"]))
+        print("✅ Connected to Google Sheet successfully!")
+        break
+    except Exception as e:
+        print(f"⚠️ Failed to connect to Google Sheet: {e}")
+        retry_count -= 1
+        if retry_count == 0:
+            print("❌ Could not connect to Google Sheet. Exiting...")
+            exit()
+        print("⏳ Retrying in 5 seconds...")
+        time.sleep(5)
+
+# -----------------------
+# 4️⃣ Bot Message Handler
+# -----------------------
+async def reply(update: Update, context: ContextTypes.DEFAULT_TYPE):
+    text = update.message.text.strip()
+    print(f"Received message: {text}")
+
+    parts = text.split()
+    response_lines = []
+    i = 0
+
+    while i < len(parts):
+        code_str = parts[i]
+        try:
+            code = int(code_str)
+        except ValueError:
+            i += 1
+            continue
+
+        discount = 0
+        # Check if next part is a discount
+        if i + 1 < len(parts) and "%" in parts[i + 1]:
+            discount_str = parts[i + 1].replace("%", "")
+            try:
+                discount = float(discount_str)
+            except ValueError:
+                discount = 0
+            i += 1  # Skip discount part
+
+        # Find item in sheet
+        item = data[data["ItemCode"] == code]
+        if item.empty:
+            response_lines.append(f"Item code {code} not found")
+        else:
+            name = item.iloc[0]["ItemName"]
+            price = item.iloc[0]["MRP"]
+            net_price = price * (1 - discount / 100)
+            if discount > 0:
+                response_lines.append(
+                    f"Item: {name}\nMRP: {price}\nDiscount: {discount}%\nNet Price: **{net_price:.2f}**"
+                )
+            else:
+                response_lines.append(f"Item: {name}\nMRP: {price}\nNet Price: **{net_price:.2f}**")
+        i += 1
+
+    # Add greeting
+    greeting = "Thanks, Mahbub!"
+    await update.message.reply_text("\n\n".join(response_lines) + f"\n\n{greeting}", parse_mode="Markdown")
+
+# -----------------------
+# 5️⃣ Run Bot
+# -----------------------
+app = ApplicationBuilder().token(TOKEN).build()
+app.add_handler(MessageHandler(filters.TEXT, reply))
+print("✅ Bot is running... Waiting for messages.")
+app.run_polling()
